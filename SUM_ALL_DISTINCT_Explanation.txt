@@ -1,0 +1,18 @@
+Explanation of SUM, SUM(ALL), and SUM(DISTINCT) in Oracle SQL
+
+SUM(column) adds all non-NULL values in a column, including repeated values.
+
+SUM(ALL column) does exactly the same thing as SUM(column). ALL explicitly includes duplicate values, but it is already the default, so writing ALL is optional.
+
+SUM(DISTINCT column) adds only unique non-NULL values. If the same number appears multiple times, it is counted once in the sum. It does not calculate an average.
+
+For example, the salary values in EMPLOYEES_912_TEST_2 are:
+NULL, NULL, 100, 100, 200, 200, 300
+
+SUM(salary) = 900
+SUM(ALL salary) = 900
+SUM(DISTINCT salary) = 600
+
+The first two add 100 + 100 + 200 + 200 + 300, while DISTINCT adds 100 + 200 + 300. All three ignore NULL values.
+
+In practice, SUM(salary) is appropriate for calculating total payroll because employees with equal salaries must still be counted separately. SUM(DISTINCT salary) is only appropriate when the goal is to add each different salary amount once.
